@@ -1,10 +1,10 @@
 import "./App.css";
-import Login from "./pages/auth/login";
+import { AppRouter } from "./routers/AppRouter";
 
 function App() {
   return (
     <div className="App">
-      <Login />
+      <AppRouter isLoggedIn={true} />
     </div>
   );
 }
