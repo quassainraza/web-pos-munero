@@ -1,0 +1,11 @@
+# Dependency directories
+node_modules/
+dist/
+coverage/
+
+# Environment files
+.env
+
+# Compiled output
+*.log
+*.gz
