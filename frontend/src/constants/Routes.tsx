@@ -1,23 +1,17 @@
 import { RouteObject } from "react-router-dom";
 
-import Orders from "../pages/Dashboard/Orders";
 import Catalog from "../pages/Dashboard/Catalog";
 import Login from "../pages/auth/login";
 
 export const Routes: RouteObject[] = [
   {
-    path: "/",
-    children: [
-      {
-        path: "/orders",
-        element: <Orders />,
-      },
-      {
-        path: "/catalog",
-        element: <Catalog />,
-      },
-    ],
+    path: "/catalog",
+    element: <Catalog />,
   },
+  // {
+  //   path: "/orders",
+  //   element: <Orders />,
+  // },
 ];
 
 export const AuthRoutes: RouteObject[] = [

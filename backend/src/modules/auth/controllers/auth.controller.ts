@@ -9,11 +9,18 @@ export const loginPos = async (req : Request, res : Response) => {
         return res.status(400).json({ error: 'Username and password are required.' });
       }
 
-      // Fetch token from GIFTLOV API
-      const response = await axios.post('https://staging.giftlov.com/api/Base/generateToken', {
-        username,
-        password
-      });
+     // Fetch base URL from environment variables
+     const baseUrl = process.env.REACT_APP_BASE_URL;
+
+     // Construct complete API URL
+     const apiUrl = `${baseUrl}/api/Base/generateToken`;
+
+     // Fetch token from GIFTLOV API
+     const response = await axios.post(apiUrl, {
+         username,
+         password
+     });
+
 
       // Send the token back to the frontend
       res.json(response.data);

@@ -1,4 +1,4 @@
-import express, { Request, Response } from 'express';
+import express from 'express';
 import bodyParser from 'body-parser';
 import cors from 'cors';
 
@@ -13,26 +13,11 @@ var corsOptions = {
 }
 app.use(cors(corsOptions));
 const authRouter = require ("../src/modules/auth/routes/auth.routes");
+const catalogRouter = require("../src/modules/catalog/routes/catalog.routes");
 app.use(`/api/auth`,authRouter.router);
+app.use(`/api/catalog`,catalogRouter.router);
 const PORT = process.env.PORT || 4000;
 
-
-
-//app.use(cors(corsOptions)); // Use the cors middleware with the options
-let authToken: string | null = null;
-
-
-
-// Endpoint to handle user login
-
-// Middleware to check if token is available
-const checkToken = (req: Request, res: Response, next: Function) => {
-  if (!authToken) {
-    res.status(401).json({ error: 'Authorization token not available. Please try again later.' });
-  } else {
-    next();
-  }
-};
 
 
 (async () => {

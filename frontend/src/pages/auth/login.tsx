@@ -1,9 +1,9 @@
-import axios from "axios";
 import { useState } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import axios from "axios";
 
 // Styled components
 const Container = styled.div`
@@ -57,7 +57,6 @@ const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
-
   // Function to handle form submission
   const handleSubmit = async (e: any) => {
     e.preventDefault();
@@ -74,10 +73,11 @@ const Login = () => {
       const { token, expireDate } = response.data;
       localStorage.setItem("token", token);
       localStorage.setItem("expireDate", expireDate);
-      navigate("/catalog");
       setUsername("");
       setPassword("");
+      console.log("Login successful");
       toast.success("Login successful");
+      navigate("/catalog", { replace: true });
     } catch (error) {
       console.error("Login failed:", error);
       toast.error("Login failed. Please try again.");
@@ -107,9 +107,7 @@ const Login = () => {
               onChange={(e) => setPassword(e.target.value)}
             />
           </FormGroup>
-          <Button onClick={handleSubmit} type="submit">
-            Login
-          </Button>
+          <Button type="submit">Login</Button>
         </form>
       </FormContainer>
     </Container>
