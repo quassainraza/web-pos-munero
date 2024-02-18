@@ -1,7 +1,8 @@
 import { RouteObject } from "react-router-dom";
-import Login from "../pages/auth/Login";
+
 import Orders from "../pages/Dashboard/Orders";
 import Catalog from "../pages/Dashboard/Catalog";
+import Login from "../pages/auth/login";
 
 export const Routes: RouteObject[] = [
   {
