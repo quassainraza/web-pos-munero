@@ -1,7 +1,10 @@
 import { useEffect, useState } from "react";
 import "./App.css";
-import { AppRouter } from "./routers/AppRouter";
 import moment from "moment";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import Catalog from "./pages/Dashboard/Catalog";
+import Orders from "./pages/Dashboard/Orders";
+import Login from "./pages/auth/login";
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -20,7 +23,7 @@ function App() {
       } else {
         // Token has expired
         localStorage.removeItem("token");
-        localStorage.removeItem("expirationDate");
+        localStorage.removeItem("expireDate");
         setIsAuthenticated(false);
       }
     } else {
@@ -28,12 +31,19 @@ function App() {
       setIsAuthenticated(false);
     }
   }, []);
-
   return (
-    <div className="App">
-      <AppRouter isLoggedIn={isAuthenticated} />
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route index element={isAuthenticated ? <Catalog /> : <Login />} />
+        <Route path="orders" element={<Orders />} />
+      </Routes>
+    </BrowserRouter>
   );
+  // return (
+  //   <div className="App">
+  //     <AppRouter isLoggedIn={isAuthenticated} />
+  //   </div>
+  // );
 }
 
 export default App;
