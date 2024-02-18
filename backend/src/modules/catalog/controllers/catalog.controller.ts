@@ -51,6 +51,7 @@ export const catalog = async (req: Request , res: Response) => {
 
         // Send the response from the external API to the client
         res.json(response.data);
+
     } catch (error) {
         console.error('Catalog failed:', error);
         res.status(500).json({ error: 'Failed to fetch items. Please try again later.' });

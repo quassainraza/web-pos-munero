@@ -1,10 +1,5 @@
-import { Response, Request } from "express";
-
-export const order = async (req: Request , res: Response) => {
 
 
-
-
-
+export const orders = async (req: Request , res: Response)=> {
 
 }
