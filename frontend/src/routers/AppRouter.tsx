@@ -10,7 +10,7 @@ interface Props {
 export const AppRouter = ({ isLoggedIn }: Props) => {
   return (
     <div>
-      <RouterProvider router={isLoggedIn ? authRouter : authRouter} />
+      <RouterProvider router={isLoggedIn ? appRouter : authRouter} />
     </div>
   );
 };

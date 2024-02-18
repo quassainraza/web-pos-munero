@@ -1,5 +1,9 @@
+import axios from "axios";
 import { useState } from "react";
 import styled from "styled-components";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 // Styled components
 const Container = styled.div`
@@ -52,17 +56,32 @@ const Login = () => {
   // State for keeping track of input values
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const navigate = useNavigate();
 
   // Function to handle form submission
-  const handleSubmit = (e: any) => {
+  const handleSubmit = async (e: any) => {
     e.preventDefault();
     // Perform login authentication here
     console.log("Login button clicked!");
     console.log("Username:", username);
     console.log("Password:", password);
-    // Clear input fields after submission
-    setUsername("");
-    setPassword("");
+
+    try {
+      const response = await axios.post("http://localhost:4000/api/auth/", {
+        username,
+        password,
+      });
+      const { token, expireDate } = response.data;
+      localStorage.setItem("token", token);
+      localStorage.setItem("expireDate", expireDate);
+      navigate("/catalog");
+      setUsername("");
+      setPassword("");
+      toast.success("Login successful");
+    } catch (error) {
+      console.error("Login failed:", error);
+      toast.error("Login failed. Please try again.");
+    }
   };
 
   return (
@@ -88,7 +107,9 @@ const Login = () => {
               onChange={(e) => setPassword(e.target.value)}
             />
           </FormGroup>
-          <Button type="submit">Login</Button>
+          <Button onClick={handleSubmit} type="submit">
+            Login
+          </Button>
         </form>
       </FormContainer>
     </Container>
